@@ -36,7 +36,6 @@ public class UIDistanceSlider : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"GameManager.Instance.IsGOAL:{GameManager.Instance.IsGOAL}");
         if (GameManager.Instance.IsGOAL == false)
         {
             direction_Z = GetDistance(); // プレイヤーとゴールの距離を計算
