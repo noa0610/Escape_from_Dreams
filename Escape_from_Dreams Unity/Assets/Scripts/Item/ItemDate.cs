@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// アイテムに含まれるデータを管理するクラス
+/// </summary>
 [System.Serializable]
 public class ItemDate
 {
@@ -15,6 +18,9 @@ public class ItemDate
         Effect = effect;
     }
 
+    /// <summary>
+    /// アイテムを使用する処理
+    /// </summary>
     public void UseItem()
     {
         Effect?.ApplyEffect();

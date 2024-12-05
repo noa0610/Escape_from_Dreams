@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ゲームのフラグを管理するシングルトン
+/// </summary>
 public class GameManager : MonoBehaviour
 {
-    /// <summary>
-    /// ゲームのフラグを管理するシングルトン
-    /// </summary>
+
     public static GameManager Instance; // シングルトンインスタンスを保持
 
     // 内部処理する変数

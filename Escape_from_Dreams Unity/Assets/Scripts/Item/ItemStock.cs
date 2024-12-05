@@ -12,13 +12,13 @@ public class ItemStock : MonoBehaviour
     private List<ItemDate> itemStock = new List<ItemDate>();
 
     // アイテムを追加
-    public void AddItem(ItemDate item)
+    public void AddItem(ItemDate newItem)
     {
         if (itemStock.Count >= MaxStock)
         {
-            itemStock.RemoveAt(0); // 一番古いアイテムを削除
+            itemStock.RemoveAt(itemStock.Count - 1); // 最後尾を削除
         }
-        itemStock.Add(item); // 取得したアイテムを追加
+        itemStock.Insert(0, newItem); // 先頭に取得したアイテムを追加
         UpdateUI(); // UIを更新する
     }
 
@@ -27,9 +27,10 @@ public class ItemStock : MonoBehaviour
     {
         if (itemStock.Count > 0) // ストックアイテムが1個以上あるとき
         {
-            ItemDate usedItem = itemStock[itemStock.Count - 1]; // 使用するアイテムの取得
-            itemStock.RemoveAt(itemStock.Count - 1); // 使用したアイテムを削除
-            UpdateUI(); // UIを更新する
+            ItemDate usedItem = itemStock[0]; // 先頭のアイテムを取得
+            itemStock.RemoveAt(0);            // リストの先頭のアイテムを削除
+            UpdateUI();                       // UIを更新する
+            usedItem.UseItem();               // アイテム効果を実行
             Debug.Log($"Used item: {usedItem.Name}");
         }
         else

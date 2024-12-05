@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// アイテムをストックできるようにするスクリプト
+/// </summary>
 public class UIItemStock : MonoBehaviour
 {
     [SerializeField] public List<Image> itemSlots; // アイテムスロットUI（3つのImageコンポーネント）

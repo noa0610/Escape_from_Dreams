@@ -8,8 +8,8 @@ using UnityEngine;
 public class BommEffect : MonoBehaviour, IItemEffect
 {
     [SerializeField] private GameObject BOMM_PREFAB; 
-    public void ApplyEffect()
+    public void ApplyEffect() // バクダン生成処理の実装
     {
-        // バクダン生成処理の実装
+        Instantiate(BOMM_PREFAB); // プレハブをインスタンス化
     }
 }

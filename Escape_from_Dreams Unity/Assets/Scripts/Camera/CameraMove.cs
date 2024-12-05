@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// カメラを動かす処理
+/// </summary>
 public class CameraMove : MonoBehaviour
 {
     public Vector3 offset = new Vector3(0, 10, -10); // プレイヤーからのオフセット位置

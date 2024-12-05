@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの命中判定、アイテムの取得、使用ができる
+/// </summary>
 public class PlayerHitDetection : MonoBehaviour
 {
     // 内部処理する変数
@@ -9,12 +13,13 @@ public class PlayerHitDetection : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.AddComponent<ItemStock>();
         itemStock = GetComponent<ItemStock>();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E)) // "E"キーでアイテム使用
+        if (Input.GetKeyDown(KeyCode.E)) // "E"キーでアイテム使用
         {
             itemStock.UseLatestItem(); // アイテムのストックを消費
         }
