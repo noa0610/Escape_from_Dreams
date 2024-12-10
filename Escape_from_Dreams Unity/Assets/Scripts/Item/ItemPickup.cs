@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ステージに配置するプレハブの効果
+/// ステージに配置するプレハブの効果（）
 /// </summary>
 public class ItemPickup : MonoBehaviour
 {
@@ -18,5 +18,13 @@ public class ItemPickup : MonoBehaviour
     {
         IItemEffect effect = GetComponent<IItemEffect>(); // プレハブにアタッチされた効果を取得
         return new ItemDate(itemName, itemIcon, effect); // プレハブのアイテムのデータを返す
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

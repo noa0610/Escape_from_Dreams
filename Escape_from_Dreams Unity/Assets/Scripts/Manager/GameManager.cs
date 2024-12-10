@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // 内部処理する変数
     private bool isGame = false; // ゲーム中フラグ
     private bool isGOAL = false; // ゴールフラグ
+    private bool isGameOver = false; // ゲームオーバーフラグ
 
     // プロパティ
     public bool IsGame // ゲーム中フラグ取得プロパティ
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour
     {
         get { return isGOAL; }
         set { isGOAL = value; }
+    }
+    public bool IsGameOver // ゲームオーバーフラグ取得プロパティ
+    {
+        get { return isGameOver; }
+        set { isGameOver = value; }
     }
 
     void Start()

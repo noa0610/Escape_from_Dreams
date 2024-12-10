@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2340893262372832984}
   - component: {fileID: 7196963522444011024}
+  - component: {fileID: 7334997090238039953}
   - component: {fileID: 914456866076256932}
   - component: {fileID: 6764640569275838923}
   - component: {fileID: 6824813082311420782}
@@ -50,6 +51,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wheel
   itemIcon: {fileID: 21300000, guid: 16459be854835eb45913419f8e479b18, type: 3}
+--- !u!114 &7334997090238039953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679441753305360724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02904b43bd425c44bad0236ed20ad41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SPEED_BOOST_AMOUNT: 2
+  DURATION: 3
+  WHEEL_ATTACK_PREFAB: {fileID: 2928480487799837945, guid: c791e49e076df7c4ca817752f324e000, type: 3}
 --- !u!33 &914456866076256932
 MeshFilter:
   m_ObjectHideFlags: 0

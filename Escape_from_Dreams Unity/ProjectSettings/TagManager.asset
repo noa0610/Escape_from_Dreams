@@ -6,6 +6,9 @@ TagManager:
   tags:
   - GOALPoint
   - Item
+  - Obstacle
+  - BodyCollider
+  - SideCollider
   layers:
   - Default
   - TransparentFX
