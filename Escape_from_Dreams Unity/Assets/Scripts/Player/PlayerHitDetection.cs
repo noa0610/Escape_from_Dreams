@@ -14,7 +14,7 @@ public class PlayerHitDetection : MonoBehaviour
     private ItemStock _ItemStock;
     private PlayerMove _PlayerMove;
 
-    void Start()
+    private void Start()
     {
         this.gameObject.AddComponent<ItemStock>(); // アイテムストックスクリプトをアタッチ
         _ItemStock = GetComponent<ItemStock>();     // アイテムストック取得
@@ -67,8 +67,6 @@ public class PlayerHitDetection : MonoBehaviour
 
                 Debug.Log("Speed reduced: Side hit an obstacle!");
             }
-
         }
-
     }
 }

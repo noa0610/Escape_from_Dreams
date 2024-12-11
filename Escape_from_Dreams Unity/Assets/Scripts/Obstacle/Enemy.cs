@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         currentHP = currentHP - damage;
         if(currentHP <= 0)
         {
-            Debug.Log($"Obstacle : HP ={currentHP}, Destroy");
+            Debug.Log($"Obstacle : Destroy");
             Destroy(this.gameObject);
         }
     }

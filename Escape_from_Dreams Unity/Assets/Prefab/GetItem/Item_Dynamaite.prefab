@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9090625631098889754}
   - component: {fileID: 6330843740776142597}
   - component: {fileID: 3781901431308662515}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item_Dynamaite
   m_TagString: Item
   m_Icon: {fileID: 0}

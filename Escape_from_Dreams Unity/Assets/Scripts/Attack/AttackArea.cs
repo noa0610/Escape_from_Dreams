@@ -6,7 +6,6 @@ public class AttackArea : MonoBehaviour
 {
     [SerializeField] private float DURATION = 1f;  // 持続時間
     [SerializeField] private int DAMAGE = 10;     // ダメージ量
-    // [SerializeField] private float RADIUS = 2f;   // 攻撃範囲
 
     // プロパティ
     public float Duration

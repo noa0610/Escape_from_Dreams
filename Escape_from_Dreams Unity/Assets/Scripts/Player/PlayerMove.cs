@@ -28,15 +28,16 @@ public class PlayerMove : MonoBehaviour
     private List<SpeedUpEffect> activeEffects = new List<SpeedUpEffect>();
     private float speedBoost = 1f;          // 速度増加倍率
     private GameObject attackAreaPrefab;    // 攻撃判定プレハブ
+    private GameObject activeAttackArea;
     private bool canAttack = false;         // 攻撃可能状態か
 
-    void Start()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>(); // リジッドボディ取得
         _characterAnime = gameObject.AddComponent<CharacterAnime>(); // "CharacterAnime"をオブジェクトに追加
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // 常に前に進む
         ForwardMove();
@@ -49,8 +50,6 @@ public class PlayerMove : MonoBehaviour
         }
 
         MoveSpeedLimit(); // 移動速度制限
-
-        Debug.Log($"{speedBoost}");
     }
 
 
@@ -143,19 +142,26 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-    // ステータス効果
+    // 速度上昇効果
     private void ApplyStatusEffects()
     {
         // 有効な効果を適用
         activeEffects.RemoveAll(effect => effect.IsExpired()); // 効果が終了していれば削除
 
-
-        foreach (var effect in activeEffects)
+        if (activeEffects.Count == 0)
         {
-            speedBoost = effect.speedBoost; // 速度上昇効果を取得
-            if (effect.enableAttack)
+            Destroy(activeAttackArea); // 効果が終了しているなら攻撃判定を削除
+            speedBoost = 1f;          // 速度倍率を元に戻す
+        }
+        else
+        {
+            foreach (var effect in activeEffects)
             {
-                canAttack = true; // 攻撃を有効化
+                speedBoost = effect.speedBoost; // 速度上昇効果を取得
+                if (effect.enableAttack) // 効果に攻撃判定が含まれるなら
+                {
+                    UseAttack(); // 攻撃を有効化
+                }
             }
         }
     }
@@ -176,9 +182,15 @@ public class PlayerMove : MonoBehaviour
     {
         if (attackAreaPrefab != null)
         {
+            if(activeAttackArea != null) // 攻撃判定が存在しているなら
+            {
+                Destroy(activeAttackArea); // 古い攻撃判定を削除
+            }
+
             // 攻撃判定オブジェクトを生成し、プレイヤーの子オブジェクトとして設定
-            GameObject attackArea = Instantiate(attackAreaPrefab, transform.position, Quaternion.identity);
-            attackArea.transform.SetParent(transform); // プレイヤーの子に設定
+            activeAttackArea = Instantiate(attackAreaPrefab, transform.position, Quaternion.identity);
+            activeAttackArea.transform.SetParent(transform); // プレイヤーの子に設定
+            attackAreaPrefab = null;
         }
     }
 }
