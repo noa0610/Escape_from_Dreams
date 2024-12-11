@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - BodyCollider
   - SideCollider
+  - Wall
   layers:
   - Default
   - TransparentFX

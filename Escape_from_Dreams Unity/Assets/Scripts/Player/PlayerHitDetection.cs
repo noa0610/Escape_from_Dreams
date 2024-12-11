@@ -47,6 +47,8 @@ public class PlayerHitDetection : MonoBehaviour
     {
         // プレイヤーが障害物に命中したときの処理
         // 衝突した相手オブジェクトのタグを確認
+
+        // 障害物との接触
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             // 最初の接触点を取得
@@ -63,6 +65,19 @@ public class PlayerHitDetection : MonoBehaviour
             else if (contact.thisCollider.CompareTag("SideCollider"))
             {
                 _PlayerMove.ForwardMoveReset(); // スピード減少
+                _PlayerMove.Knockback(collision.transform.position); // ノックバック
+
+                Debug.Log("Speed reduced: Side hit an obstacle!");
+            }
+        }
+
+        // 壁との接触
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            // 最初の接触点を取得
+            ContactPoint contact = collision.GetContact(0);
+            if (contact.thisCollider.CompareTag("SideCollider"))
+            {
                 _PlayerMove.Knockback(collision.transform.position); // ノックバック
 
                 Debug.Log("Speed reduced: Side hit an obstacle!");
