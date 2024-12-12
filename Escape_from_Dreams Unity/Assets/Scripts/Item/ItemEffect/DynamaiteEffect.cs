@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// アイテム「ダイナマイト」を使用したときの効果
@@ -17,7 +18,7 @@ public class DynamaiteEffect : MonoBehaviour, IItemEffect
     }
     void ShootDinamit()//発射するスクリプト
     {
-        Vector3 vector = new Vector3(SHOT_POINT.position.x,SHOT_POINT.position.y+1,SHOT_POINT.position.z + 1.5f);
+        Vector3 vector = new Vector3(SHOT_POINT.position.x,SHOT_POINT.position.y+1,SHOT_POINT.position.z + 1.5f);//生成する位置を取得
         //ボムを生成
         GameObject projectile = Instantiate(DYNAMAITE_PREFAB, vector, SHOT_POINT.rotation);
 
