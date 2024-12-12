@@ -10,7 +10,7 @@ public class WheelEffect : MonoBehaviour, IItemEffect
     [SerializeField] private float SPEED_BOOST_AMOUNT = 2f;  // 速度上昇量
     [SerializeField] private float DURATION = 3f;            // 効果時間
     [SerializeField] private GameObject WHEEL_ATTACK_PREFAB; // タイヤ攻撃判定
-    
+
     public void ApplyEffect()
     {
         PlayerMove player = FindObjectOfType<PlayerMove>(); // プレイヤーを取得

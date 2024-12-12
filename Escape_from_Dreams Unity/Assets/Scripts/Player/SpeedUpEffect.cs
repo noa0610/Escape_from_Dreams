@@ -9,6 +9,12 @@ public class SpeedUpEffect
     public bool enableAttack; // 攻撃判定を有効化するか
     private float startTime;   // 効果開始時間
 
+    /// <summary>
+    /// 速度上昇効果
+    /// </summary>
+    /// <param name="speedBoost">速度上昇倍率</param>
+    /// <param name="duration">効果時間</param>
+    /// <param name="enableAttack">攻撃判定の有無</param>
     public SpeedUpEffect(float speedBoost, float duration, bool enableAttack = false)
     {
         this.speedBoost = speedBoost;
