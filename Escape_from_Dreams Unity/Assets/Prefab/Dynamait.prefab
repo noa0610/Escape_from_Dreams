@@ -122,8 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f614bdb03e885a4f90514add1eb19f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EXPROM_POINT: {fileID: 872427360671018916}
   D_EFFECT: {fileID: 6591425747285554662, guid: d3143ab70f9deaf4bb7d74df454feff5, type: 3}
+  EXPROM_TIME: 0.1
+  EXPROM_FIRD: 0.1
 --- !u!54 &9199248525393152750
 Rigidbody:
   m_ObjectHideFlags: 0

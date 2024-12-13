@@ -62,7 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7852ebef1e5cd48aac6c9d3f61a018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BOMM_PREFAB: {fileID: 5283663305389996205, guid: d1e0357dde5a65248b434230f3496965, type: 3}
+  BOMM_PREFAB: {fileID: 2633561481979701906, guid: 5581286ddf4124847981189e78fc8e7f, type: 3}
+  BOM_SPEED: 50
 --- !u!33 &7969324750728204602
 MeshFilter:
   m_ObjectHideFlags: 0
