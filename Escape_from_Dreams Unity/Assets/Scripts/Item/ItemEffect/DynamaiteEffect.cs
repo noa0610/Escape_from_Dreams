@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 /// </summary>
 public class DynamaiteEffect : MonoBehaviour, IItemEffect
 {
-   [SerializeField] private Transform SHOT_POINT;//発射する位置と向き
+   private GameObject player;
     [SerializeField] private GameObject DYNAMAITE_PREFAB; 
     [SerializeField] private float DYNAMAITE_SPEED;//ダイナマイトの初速度
     public void ApplyEffect()
@@ -18,15 +18,16 @@ public class DynamaiteEffect : MonoBehaviour, IItemEffect
     }
     void ShootDinamit()//発射するスクリプト
     {
-        Vector3 vector = new Vector3(SHOT_POINT.position.x,SHOT_POINT.position.y+1,SHOT_POINT.position.z + 1.5f);//生成する位置を取得
+        player = GameObject.FindWithTag("Player");
+        Vector3 vector = new Vector3(player.transform.position.x,player.transform.position.y+1,player.transform.position.z + 1.5f);//生成する位置を取得
         //ボムを生成
-        GameObject projectile = Instantiate(DYNAMAITE_PREFAB, vector, SHOT_POINT.rotation);
+        GameObject projectile = Instantiate(DYNAMAITE_PREFAB, vector, player.transform.rotation);
 
         // Rigidbodyを取得
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
         // 発射方向を計算（例: 前方方向）
-        Vector3 launchDirection = SHOT_POINT.forward;
+        Vector3 launchDirection = player.transform.forward;
 
         // 初速度を与えて発射
         rb.velocity = launchDirection * DYNAMAITE_SPEED;

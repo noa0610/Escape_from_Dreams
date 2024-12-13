@@ -62,7 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c86e306e756214abfeaace80a48afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DYNAMAITE_PREFAB: {fileID: 0}
+  DYNAMAITE_PREFAB: {fileID: 2345325642138000679, guid: d014966e7d4eda3419cefbc5af9d801d, type: 3}
+  DYNAMAITE_SPEED: 50
 --- !u!33 &9090625631098889754
 MeshFilter:
   m_ObjectHideFlags: 0
