@@ -8,7 +8,19 @@ using UnityEngine;
 public class GOALPoint : MonoBehaviour
 {
     // インスペクターから設定する変数
+    [Header("現在のステージの番号を入力")]
     [SerializeField] private int UNLOCK_STAGE_NUMBER; // 解放するステージの番号
+
+    [Header("次のシーン名を入力")]
+    [SerializeField] private string SCENE_CHANGE_NAME; // 遷移するシーン名
+
+    [Header("シーン遷移までの時間")]
+    [SerializeField] private float SCENE_CHANGE_TIME; // シーン遷移までの時間
+
+    private void Awake()
+    {
+        GameManager.Instance.IsGOAL = false; // ゴールフラグを戻す
+    }
 
     // オブジェクトすり抜け判定取得
     private void OnTriggerEnter(Collider other)
@@ -20,6 +32,7 @@ public class GOALPoint : MonoBehaviour
                 StageManager.Instance.UnlockStage(UNLOCK_STAGE_NUMBER); // ステージを解放
             }
             GameManager.Instance.IsGOAL = true; // ゴールフラグを立てる
+            SceneChangeManager.Instance.ChangeSceneLoad(SCENE_CHANGE_NAME, SCENE_CHANGE_TIME); // 2秒後にシーン遷移
         }
     }
 }

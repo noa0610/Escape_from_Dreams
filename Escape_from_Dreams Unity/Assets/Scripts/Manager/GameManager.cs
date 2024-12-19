@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         set { isGameOver = value; }
     }
 
-    void Start()
+    void Awake()
     {
         // シングルトンインスタンスの設定
         if (Instance == null)

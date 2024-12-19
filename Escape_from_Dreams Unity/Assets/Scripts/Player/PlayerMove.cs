@@ -27,9 +27,10 @@ public class PlayerMove : MonoBehaviour
 
     private List<SpeedUpEffect> activeEffects = new List<SpeedUpEffect>();
     private float speedBoost = 1f;          // 速度増加倍率
+    private float defaultSpeedBoost = 1f;   // 通常速度倍率
     private GameObject attackAreaPrefab;    // 攻撃判定プレハブ
     private GameObject activeAttackArea;
-    private bool canAttack = false;         // 攻撃可能状態か
+    private bool isSpeedBoost = false;      // 速度上昇状態か
 
     private void Start()
     {
@@ -39,12 +40,13 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log($"isSpeedBoost:{isSpeedBoost}");
         // 常に前に進む
         ForwardMove();
 
         ApplyStatusEffects(); // アイテムの効果を確認
 
-        if (isKnockedBack == false) // ノックバックが発生していなければ
+        if (isKnockedBack == false && isSpeedBoost == false) // ノックバックが発生していなければ
         {
             SideMoveInput(); // 左右移動入力
         }
@@ -145,24 +147,32 @@ public class PlayerMove : MonoBehaviour
     // 速度上昇効果
     private void ApplyStatusEffects()
     {
-        // 有効な効果を適用
-        activeEffects.RemoveAll(effect => effect.IsExpired()); // 効果が終了していれば削除
+        // 有効な効果を適用、効果時間が終了していれば削除
+        activeEffects.RemoveAll(effect => effect.IsExpired());
 
-        if (activeEffects.Count == 0)
+        if (activeEffects.Count == 0) // 速度上昇効果の数が0なら
         {
-            Destroy(activeAttackArea); // 効果が終了しているなら攻撃判定を削除
-            speedBoost = 1f;          // 速度倍率を元に戻す
+            Destroy(activeAttackArea); // 攻撃判定を削除
+            speedBoost = defaultSpeedBoost; // 速度倍率を元に戻す
         }
         else
         {
-            foreach (var effect in activeEffects)
+            foreach (var effect in activeEffects) // 取得した効果を適用
             {
-                speedBoost = effect.speedBoost; // 速度上昇効果を取得
-                if (effect.enableAttack) // 効果に攻撃判定が含まれるなら
+                speedBoost = effect.speedBoost; // 速度上昇効果を適用
+                SideMoveVelocity(Vector3.zero); // 移動しない
+                isSpeedBoost = true;           // 速度上昇フラグを設定
+
+                if (effect.enableAttack)        // 効果に攻撃判定が含まれるなら
                 {
-                    UseAttack(); // 攻撃を有効化
+                    UseAttack();                // 攻撃を有効化
                 }
             }
+        }
+
+        if (speedBoost == defaultSpeedBoost)
+        {
+            isSpeedBoost = false;      // 速度上昇フラグを解除
         }
     }
 
@@ -182,7 +192,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (attackAreaPrefab != null)
         {
-            if(activeAttackArea != null) // 攻撃判定が存在しているなら
+            if (activeAttackArea != null) // 攻撃判定が存在しているなら
             {
                 Destroy(activeAttackArea); // 古い攻撃判定を削除
             }
@@ -190,6 +200,10 @@ public class PlayerMove : MonoBehaviour
             // 攻撃判定オブジェクトを生成し、プレイヤーの子オブジェクトとして設定
             activeAttackArea = Instantiate(attackAreaPrefab, transform.position, Quaternion.identity);
             activeAttackArea.transform.SetParent(transform); // プレイヤーの子に設定
+
+            // ローカル回転をリセット
+            activeAttackArea.transform.localRotation = Quaternion.identity;
+
             attackAreaPrefab = null;
         }
     }

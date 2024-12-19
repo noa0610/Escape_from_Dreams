@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02904b43bd425c44bad0236ed20ad41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SPEED_BOOST_AMOUNT: 2
+  SPEED_BOOST_AMOUNT: 2.5
   DURATION: 3
   WHEEL_ATTACK_PREFAB: {fileID: 2928480487799837945, guid: c791e49e076df7c4ca817752f324e000, type: 3}
 --- !u!33 &914456866076256932

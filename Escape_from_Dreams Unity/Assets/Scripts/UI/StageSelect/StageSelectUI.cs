@@ -61,7 +61,7 @@ public class StageSelectUI : MonoBehaviour
     // ステージ選択操作
     private void HandleKeyboardInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // 右キーで次のステージ
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // 左キーで次のステージ
         {
             // 現在のインデックスから左方向に次の解放済みステージを探す
             do
@@ -78,7 +78,7 @@ public class StageSelectUI : MonoBehaviour
 
             Debug.Log($"{selectedStageIndex}");
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // 左キーで前のステージ
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // 右キーで前のステージ
         {
             // 現在のインデックスから右方向に次の解放済みステージを探す
             do

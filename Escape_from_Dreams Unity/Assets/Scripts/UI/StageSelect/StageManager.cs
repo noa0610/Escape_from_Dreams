@@ -46,6 +46,7 @@ public class StageManager : MonoBehaviour
         {
             stageUnlocked[stageIndex] = true; // ステージを解放
             SaveStageData(); // 解放状況をセーブ
+            Debug.Log($"Unlocked:1 = {stageUnlocked[0]}、2 = {stageUnlocked[1]}、3 = {stageUnlocked[2]}、4 = {stageUnlocked[3]}");
         }
     }
 
