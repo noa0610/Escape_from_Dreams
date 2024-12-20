@@ -263,6 +263,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3069812714493482987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6831029714681743688}
+  m_Layer: 0
+  m_Name: GOALUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6831029714681743688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069812714493482987}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 902760933066824940}
+  m_Father: {fileID: 2168180285047749369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3112830337749333108
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,13 +644,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4522112609094429006}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1638982594559152190}
-  m_Father: {fileID: 2168180285047749369}
+  m_Father: {fileID: 6831029714681743688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -638,6 +670,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GOAL_TEXT_OBJECT: {fileID: 8260842494207537663}
+  GOAL_WINDOW_OBJECT: {fileID: 0}
+  GOAL_BUTTON_IMAGE: {fileID: 0}
+  TEXT: {fileID: 0}
+  GOAL_WINDOW_ACTUVE_TIME: 0
 --- !u!1 &4643697153395265372
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +933,7 @@ RectTransform:
   m_Children:
   - {fileID: 3042912619770445633}
   - {fileID: 8884157091168756787}
-  - {fileID: 902760933066824940}
+  - {fileID: 6831029714681743688}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
