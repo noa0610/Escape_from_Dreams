@@ -31,19 +31,30 @@ public class SceneChangeManager : MonoBehaviour
     // 指定されたシーンに遷移するメソッド
     public void ChangeSceneLoad(string sceneName) // 引数sceneNameは他スクリプトから指定
     {
+        Debug.Log("SceneChange1");
         if (isChangingScene) return; // 既に遷移中なら無視
 
+        Debug.Log("SceneChange2");
         isChangingScene = true; // 遷移中のフラグを設定
-        SceneManager.LoadScene(sceneName); // 引数からシーンをロード
-        isChangingScene = false; // シーン遷移が終わったら解除
+        StartCoroutine(LoadSceneAsync(sceneName)); // 非同期ロードを開始
     }
 
     // シーン遷移を遅延させるコルーチンを呼び出すメソッド(オーバーロード)
     public void ChangeSceneLoad(string sceneName, float changetime) // 引数sceneNameは他スクリプトから指定
     {
+        Debug.Log("SceneChangeDeray1");
         if (isChangingScene) return; // 既に遷移中なら無視
         
+        Debug.Log("SceneChangeDeray2");
         StartCoroutine(ChangeSceneWithDelay(sceneName, changetime)); // 引数からシーンをロード
+    }
+
+    // 非同期でシーンをロード
+    private IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.completed += _ => isChangingScene = false; // ロード完了時にフラグを解除
+        yield return asyncLoad; // ロード完了を待機
     }
 
     // 実際のコルーチン処理は内部で管理
@@ -51,7 +62,6 @@ public class SceneChangeManager : MonoBehaviour
     {
         isChangingScene = true; // 遷移中のフラグを設定
         yield return new WaitForSeconds(delay); // 指定の時間待機
-        SceneManager.LoadScene(sceneName); // 引数からシーンをロード
-        isChangingScene = false; // シーン遷移が終わったら解除
+        yield return LoadSceneAsync(sceneName); // シーンロードを非同期で処理
     }
 }

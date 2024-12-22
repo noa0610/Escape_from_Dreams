@@ -30,11 +30,11 @@ public class UIStartText : MonoBehaviour
         if(countdounTime <= START_TEXT_CHANGE_TIME && GameManager.Instance.IsGame == false)
         {
             _textMeshPro.text = string.Format(CHANGE_TEXT); // テキストを変更する
-            GameManager.Instance.IsGame = true; // ゲーム開始のフラグを立てる
         }
 
         if(countdounTime <= 0)
         {
+            GameManager.Instance.IsGame = true; // ゲーム開始のフラグを立てる
             START_TEXT_OBJECT.SetActive(false); // テキストオブジェクトを非表示
             return;
         }

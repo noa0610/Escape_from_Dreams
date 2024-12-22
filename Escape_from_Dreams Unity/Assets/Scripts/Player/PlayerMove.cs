@@ -40,7 +40,6 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log($"isSpeedBoost:{isSpeedBoost}");
         // 常に前に進む
         ForwardMove();
 

@@ -7,7 +7,6 @@ public class AttackArea : MonoBehaviour
     // インスペクターから設定する変数
     [SerializeField] private float DURATION = 1f;     // 持続時間
     [SerializeField] private int DAMAGE = 10;         // ダメージ量
-    [SerializeField] private ParticleSystem particle; // 
 
     // プロパティ
     public float Duration

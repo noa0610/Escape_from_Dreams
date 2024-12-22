@@ -32,7 +32,8 @@ public class GOALPoint : MonoBehaviour
                 StageManager.Instance.UnlockStage(UNLOCK_STAGE_NUMBER); // ステージを解放
             }
             GameManager.Instance.IsGOAL = true; // ゴールフラグを立てる
-            SceneChangeManager.Instance.ChangeSceneLoad(SCENE_CHANGE_NAME, SCENE_CHANGE_TIME); // 2秒後にシーン遷移
+            GameManager.Instance.IsGame = false; // ゲーム終了
+            // SceneChangeManager.Instance.ChangeSceneLoad(SCENE_CHANGE_NAME, SCENE_CHANGE_TIME); // 一定時間待機後シーン遷移
         }
     }
 }

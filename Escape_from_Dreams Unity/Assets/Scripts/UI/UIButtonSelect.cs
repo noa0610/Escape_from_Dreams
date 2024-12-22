@@ -14,6 +14,20 @@ public class UIButtonSelect : MonoBehaviour
     private int selectedButtunIndex = 0; // 現在選択中のボタン
     private void Start()
     {
+        if (SELECT_BUTTUNS == null || SELECT_BUTTUNS.Length == 0)
+        {
+            Debug.LogError("SELECT_BUTTUNSが設定されていません。");
+        }
+
+        if (SCENE_NAME == null || SCENE_NAME.Length == 0)
+        {
+            Debug.LogError("SCENE_NAMEが設定されていません。");
+        }
+        else if (SELECT_BUTTUNS.Length != SCENE_NAME.Length)
+        {
+            Debug.LogError("SELECT_BUTTUNSとSCENE_NAMEの要素数が一致していません。");
+        }
+        
         HighlightSelectedButton(); // 最初のボタンをハイライト（選択状態）
     }
 
@@ -74,8 +88,7 @@ public class UIButtonSelect : MonoBehaviour
     // ボタンを選択したときの処理
     private void SelectButtun(int stageIndex)
     {
-        Debug.Log($"Buttun {stageIndex} selected!");
-        Debug.Log($"{SCENE_NAME[stageIndex]}");
+        Debug.Log($"ボタン {stageIndex} を選択: {SCENE_NAME[stageIndex]}");
         SceneChangeManager.Instance.ChangeSceneLoad(SCENE_NAME[stageIndex]); // シーン遷移する
     }
 }
