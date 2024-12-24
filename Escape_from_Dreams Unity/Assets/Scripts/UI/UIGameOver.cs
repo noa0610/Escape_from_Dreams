@@ -24,13 +24,19 @@ public class UIGameOver : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+        GameManager.Instance.IsGameOver = false;
+
         // 初期化の際、設定忘れ防止でオブジェクトを非表示にする
         GAMEOVER_TEXT_OBJECT.SetActive(false);
         GAMEOVER_WINDOU_OBJECT.SetActive(false);
+
+        StartCoroutine(GameOverUIActive());
     }
 
     private IEnumerator GameOverUIActive()
     {
+        Debug.Log("GameOverUIActive while");
         while (!GameManager.Instance.IsGameOver) // ゲームオーバーまで繰り返す
         {
             yield return null; // 次のフレームまで待機
@@ -47,12 +53,17 @@ public class UIGameOver : MonoBehaviour
         GAMEOVER_WINDOU_OBJECT.SetActive(true);
 
         // ボタンの画像を表示
-        StartCoroutine(UIFade.FadeIn(GAMEOVER_BUTTON_IMAGE, 1));
+        StartCoroutine(UIFade.FadeIn(GAMEOVER_BUTTON_IMAGE, GAMEOVER_FADE_TIME));
 
         // ボタンのテキストを表示
-        StartCoroutine(UIFade.FadeIn(GAMEOVER_TEXT, 1));
+        StartCoroutine(UIFade.FadeIn(GAMEOVER_TEXT, GAMEOVER_FADE_TIME));
 
         // 最初のゲームオーバーのテキストを非表示
         GAMEOVER_TEXT_OBJECT.SetActive(false);
+
+        // フェードインが終わるまでの時間待機
+        yield return new WaitForSeconds(GAMEOVER_FADE_TIME);
+
+        Time.timeScale = 0f;
     }
 }

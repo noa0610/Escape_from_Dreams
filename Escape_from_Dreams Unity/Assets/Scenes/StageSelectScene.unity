@@ -1941,6 +1941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849819244}
   - component: {fileID: 1849819248}
+  - component: {fileID: 1849819249}
   - component: {fileID: 1849819247}
   - component: {fileID: 1849819246}
   - component: {fileID: 1849819245}
@@ -2079,6 +2080,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SCENE_CHANGE_NAME: TitleScene
   SCENE_CHANGE_DELAY: 0
+--- !u!114 &1849819249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849819243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ca942cf77b04e4eabd92244165e556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SCENE_CHANGE_NAME: TitleScene
 --- !u!1001 &9007676495066998034
 PrefabInstance:
   m_ObjectHideFlags: 0

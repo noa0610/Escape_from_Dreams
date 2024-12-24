@@ -37,7 +37,7 @@ public class UITimerText : MonoBehaviour
     {
         if (GameManager.Instance.IsGame)
         {
-            if (!GameManager.Instance.IsGOAL)
+            if (!GameManager.Instance.IsGOAL && !GameManager.Instance.IsGameOver)
             {
                 if (!isTimerInitialized) return; // 初期化が完了するまでUpdateTimerを呼ばない
 

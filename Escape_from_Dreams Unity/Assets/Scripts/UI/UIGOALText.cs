@@ -17,7 +17,8 @@ public class UIGOALText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GOAL_BUTTON_TEXT; // ボタンのテキスト
     [SerializeField] private TextMeshProUGUI CLEARTIME_TEXT; // クリアタイム表示のテキスト
     [SerializeField] private GameObject TIMEROBJECT; // 時間を計測するスクリプトのオブジェクト
-    [SerializeField] private float GOAL_WINDOW_ACTUVE_TIME; // 画像表示までの時間
+    [SerializeField] private float GOAL_WINDOW_ACTUVE_TIME = 2; // ウィンドウ表示までの時間
+    [SerializeField] private float GOAL_FADE_TIME = 1; // フェード効果を反映させる時間
 
 
     // 内部処理する変数
@@ -48,15 +49,15 @@ public class UIGOALText : MonoBehaviour
 
         // ウィンドウを表示
         Image image = GOAL_WINDOW_OBJECT.GetComponent<Image>();
-        StartCoroutine(UIFade.FadeIn(image, 1));
+        StartCoroutine(UIFade.FadeIn(image, GOAL_FADE_TIME));
         GOAL_WINDOW_OBJECT.SetActive(true);
 
         // ボタンの画像を表示
-        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_IMAGE, 1));
+        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_IMAGE, GOAL_FADE_TIME));
 
 
         // ボタンのテキストを表示
-        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_TEXT, 1));
+        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_TEXT, GOAL_FADE_TIME));
 
 
         // クリアタイムのテキストを表示
@@ -73,5 +74,10 @@ public class UIGOALText : MonoBehaviour
 
         // 最初のゴールのテキストを非表示
         GOAL_TEXT_OBJECT.SetActive(false);
+
+        // フェードインが終わるまでの時間待機
+        yield return new WaitForSeconds(GOAL_FADE_TIME);
+
+        Time.timeScale = 0f;
     }
 }
