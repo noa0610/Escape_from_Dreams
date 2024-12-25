@@ -12,12 +12,19 @@ using UnityEngine.UI;
 public class UIGameOver : MonoBehaviour
 {
     // インスペクターから設定する変数
-    [SerializeField] private GameObject GAMEOVER_TEXT_OBJECT; // テキストをまとめた親オブジェクト
-    [SerializeField] private GameObject GAMEOVER_WINDOU_OBJECT; // ウィンドウをまとめた親オブジェクト
-    [SerializeField] private Image GAMEOVER_BUTTON_IMAGE; // ボタンの画像
-    [SerializeField] private TextMeshProUGUI GAMEOVER_TEXT; // ボタンのテキスト
-    [SerializeField] private float GAMEOVER_WINDOW_ACTUVE_TIME = 2; // ウィンドウを表示するまでの時間
-    [SerializeField] private float GAMEOVER_FADE_TIME = 1; // フェード効果を反映させる時間
+    [Header("アクティブ状態の切り替えをするオブジェクト")]
+    [SerializeField] private GameObject GAMEOVER_TEXT_OBJECT; // テキストオブジェクト
+    [SerializeField] private GameObject GAMEOVER_WINDOU_OBJECT; // ウィンドウオブジェクト
+
+    [Header("ゲームオーバー直後にフェードイン表示するUI")]
+    [SerializeField] private Graphic[] GAMEOVER_FIRST_Graphics; // ゲームオーバー直後に表示するUI
+
+    [Header("指定時間後にフェードイン表示するUI")]
+    [SerializeField] private Graphic[] GAMEOVER_NEXT_Graphics; // 指定時間後に表示するUI
+
+    [Header("表示設定")]
+    [SerializeField] private float WINDOW_ACTUVE_TIME = 2; // ウィンドウを表示するまでの時間
+    [SerializeField] private float FADE_TIME = 1; // フェード効果を反映させる時間
 
     // 内部処理する変数
     
@@ -36,34 +43,47 @@ public class UIGameOver : MonoBehaviour
 
     private IEnumerator GameOverUIActive()
     {
-        Debug.Log("GameOverUIActive while");
         while (!GameManager.Instance.IsGameOver) // ゲームオーバーまで繰り返す
         {
             yield return null; // 次のフレームまで待機
         }
-        // 最初にゲームオーバーのテキストを表示
+
+        // ゲームオーバー直後にテキストを表示
         GAMEOVER_TEXT_OBJECT.SetActive(true);
+        if (GAMEOVER_FIRST_Graphics != null)
+        {
+            FadeInGraphics(GAMEOVER_FIRST_Graphics, FADE_TIME);
+        }
 
         // ウィンドウ表示までの時間待機
-        yield return new WaitForSeconds(GAMEOVER_WINDOW_ACTUVE_TIME);
-
-        // ウィンドウを表示
-        Image image = GAMEOVER_WINDOU_OBJECT.GetComponent<Image>();
-        StartCoroutine(UIFade.FadeIn(image, GAMEOVER_FADE_TIME));
-        GAMEOVER_WINDOU_OBJECT.SetActive(true);
-
-        // ボタンの画像を表示
-        StartCoroutine(UIFade.FadeIn(GAMEOVER_BUTTON_IMAGE, GAMEOVER_FADE_TIME));
-
-        // ボタンのテキストを表示
-        StartCoroutine(UIFade.FadeIn(GAMEOVER_TEXT, GAMEOVER_FADE_TIME));
+        yield return new WaitForSeconds(WINDOW_ACTUVE_TIME);
 
         // 最初のゲームオーバーのテキストを非表示
         GAMEOVER_TEXT_OBJECT.SetActive(false);
 
-        // フェードインが終わるまでの時間待機
-        yield return new WaitForSeconds(GAMEOVER_FADE_TIME);
+        // ゴール後に表示するUIをフェードイン
+        GAMEOVER_WINDOU_OBJECT.SetActive(true);
+        if (GAMEOVER_NEXT_Graphics != null)
+        {
+            FadeInGraphics(GAMEOVER_NEXT_Graphics, FADE_TIME);
+        }
 
+        // フェードインが終わるまでの時間待機
+        yield return new WaitForSeconds(FADE_TIME);
+
+        // ゲーム時間を停止
         Time.timeScale = 0f;
+    }
+
+    // フェードイン処理を一括適用
+    private void FadeInGraphics(Graphic[] graphics, float duration)
+    {
+        foreach (var graphic in graphics)
+        {
+            if (graphic != null)
+            {
+                StartCoroutine(UIFade.FadeIn(graphic, duration));
+            }
+        }
     }
 }

@@ -11,14 +11,23 @@ using UnityEngine.UI;
 public class UIGOALText : MonoBehaviour
 {
     // インスペクターから設定する変数
+    [Header("アクティブ状態の切り替えをするオブジェクト")]
     [SerializeField] private GameObject GOAL_TEXT_OBJECT; // テキストオブジェクト
     [SerializeField] private GameObject GOAL_WINDOW_OBJECT; // ウィンドウオブジェクト
-    [SerializeField] private Image GOAL_BUTTON_IMAGE; // ウィンドウのボタンオブジェクト
-    [SerializeField] private TextMeshProUGUI GOAL_BUTTON_TEXT; // ボタンのテキスト
+
+    [Header("ゴール直後にフェードイン表示するUI")]
+    [SerializeField] private Graphic[] GOAL_FIRST_Graphics; // ゴール直後に表示するUI
+
+    [Header("指定時間後にフェードイン表示するUI")]
+    [SerializeField] private Graphic[] GOAL_NEXT_Graphics; // 指定時間後に表示するUI
+
+    [Header("クリアタイム表示")]
     [SerializeField] private TextMeshProUGUI CLEARTIME_TEXT; // クリアタイム表示のテキスト
     [SerializeField] private GameObject TIMEROBJECT; // 時間を計測するスクリプトのオブジェクト
-    [SerializeField] private float GOAL_WINDOW_ACTUVE_TIME = 2; // ウィンドウ表示までの時間
-    [SerializeField] private float GOAL_FADE_TIME = 1; // フェード効果を反映させる時間
+
+    [Header("表示設定")]
+    [SerializeField] private float WINDOW_ACTUVE_TIME = 2; // ウィンドウ表示までの時間
+    [SerializeField] private float FADE_TIME = 1; // フェード効果を反映させる時間
 
 
     // 内部処理する変数
@@ -41,23 +50,25 @@ public class UIGOALText : MonoBehaviour
             yield return null; // 次のフレームまで待機
         }
 
-        // 最初にゴールのテキストを表示
+        // ゴールした瞬間最初にゴールのテキストを表示
         GOAL_TEXT_OBJECT.SetActive(true);
+        if (GOAL_FIRST_Graphics != null)
+        {
+            FadeInGraphics(GOAL_FIRST_Graphics, FADE_TIME);
+        }
 
         // ウィンドウ表示までの時間待機
-        yield return new WaitForSeconds(GOAL_WINDOW_ACTUVE_TIME);
+        yield return new WaitForSeconds(WINDOW_ACTUVE_TIME);
 
-        // ウィンドウを表示
-        Image image = GOAL_WINDOW_OBJECT.GetComponent<Image>();
-        StartCoroutine(UIFade.FadeIn(image, GOAL_FADE_TIME));
+        // 最初のゴールのテキストを非表示
+        GOAL_TEXT_OBJECT.SetActive(false);
+
+        // ゴール後に表示するUIをフェードイン
         GOAL_WINDOW_OBJECT.SetActive(true);
-
-        // ボタンの画像を表示
-        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_IMAGE, GOAL_FADE_TIME));
-
-
-        // ボタンのテキストを表示
-        StartCoroutine(UIFade.FadeIn(GOAL_BUTTON_TEXT, GOAL_FADE_TIME));
+        if (GOAL_NEXT_Graphics != null)
+        {
+            FadeInGraphics(GOAL_NEXT_Graphics, FADE_TIME);
+        }
 
 
         // クリアタイムのテキストを表示
@@ -72,12 +83,22 @@ public class UIGOALText : MonoBehaviour
             }
         }
 
-        // 最初のゴールのテキストを非表示
-        GOAL_TEXT_OBJECT.SetActive(false);
-
         // フェードインが終わるまでの時間待機
-        yield return new WaitForSeconds(GOAL_FADE_TIME);
+        yield return new WaitForSeconds(FADE_TIME);
 
+        // ゲーム時間を停止
         Time.timeScale = 0f;
+    }
+
+    // フェードイン処理を一括適用
+    private void FadeInGraphics(Graphic[] graphics, float duration)
+    {
+        foreach (var graphic in graphics)
+        {
+            if (graphic != null)
+            {
+                StartCoroutine(UIFade.FadeIn(graphic, duration));
+            }
+        }
     }
 }
