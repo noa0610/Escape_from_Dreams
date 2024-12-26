@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bomm
   itemIcon: {fileID: 21300000, guid: 99aaa06ff8d3bc949a8f7b569a23ca6f, type: 3}
+  SE_NAME: SE ItemGet
 --- !u!114 &1100722662471285362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BOMM_PREFAB: {fileID: 2633561481979701906, guid: 5581286ddf4124847981189e78fc8e7f, type: 3}
   BOM_SPEED: 50
+  SE_NAME: SE ItemShoot
 --- !u!33 &7969324750728204602
 MeshFilter:
   m_ObjectHideFlags: 0

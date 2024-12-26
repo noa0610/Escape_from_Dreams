@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Dynamaite
   itemIcon: {fileID: 21300000, guid: 2117237520ad9854cb91789879e889d9, type: 3}
+  SE_NAME: SE ItemGet
 --- !u!114 &7519622364656407530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DYNAMAITE_PREFAB: {fileID: 2345325642138000679, guid: d014966e7d4eda3419cefbc5af9d801d, type: 3}
   DYNAMAITE_SPEED: 50
+  SE_NAME: SE ItemShoot
 --- !u!33 &9090625631098889754
 MeshFilter:
   m_ObjectHideFlags: 0

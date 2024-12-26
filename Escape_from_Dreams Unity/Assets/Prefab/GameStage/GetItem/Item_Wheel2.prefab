@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wheel
   itemIcon: {fileID: 21300000, guid: 16459be854835eb45913419f8e479b18, type: 3}
+  SE_NAME: SE ItemGet
 --- !u!114 &2362309878589132081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SPEED_BOOST_AMOUNT: 2.5
   DURATION: 3
-  WHEEL_ATTACK_PREFAB: {fileID: 2928480487799837945, guid: c791e49e076df7c4ca817752f324e000, type: 3}
+  WHEEL_ATTACK_PREFAB: {fileID: 7042833717612958645, guid: 1bb97973c52e592468b725849f5304d0, type: 3}
+  SE_NAME: 
 --- !u!33 &8618133870147027398
 MeshFilter:
   m_ObjectHideFlags: 0

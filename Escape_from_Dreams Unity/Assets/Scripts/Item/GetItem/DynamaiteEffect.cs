@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +11,7 @@ public class DynamaiteEffect : MonoBehaviour, IItemEffect
    private GameObject player;
     [SerializeField] private GameObject DYNAMAITE_PREFAB; 
     [SerializeField] private float DYNAMAITE_SPEED;//ダイナマイトの初速度
+    [SerializeField] private string SE_NAME; // ダイナマイトを投げるSEの名前
     public void ApplyEffect()
     {
         ShootDinamit();// ダイナマイトを発射するスクリプトを呼び出す
@@ -19,6 +19,11 @@ public class DynamaiteEffect : MonoBehaviour, IItemEffect
     void ShootDinamit()//発射するスクリプト
     {
         player = GameObject.FindWithTag("Player");
+
+        if (SE_NAME != null)
+        {
+            SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+        }
         Vector3 vector = new Vector3(player.transform.position.x,player.transform.position.y+1,player.transform.position.z + 1.5f);//生成する位置を取得
         //ボムを生成
         GameObject projectile = Instantiate(DYNAMAITE_PREFAB, vector, player.transform.rotation);

@@ -29,6 +29,9 @@ public class UIGOALText : MonoBehaviour
     [SerializeField] private float WINDOW_ACTUVE_TIME = 2; // ウィンドウ表示までの時間
     [SerializeField] private float FADE_TIME = 1; // フェード効果を反映させる時間
 
+    // [Header("ゴール時のSE")]
+    // [SerializeField] private string SE_NAME; // SEの名前
+
 
     // 内部処理する変数
     private UITimerText _uITimerText; // 時間計測タイマー参照用
@@ -56,6 +59,11 @@ public class UIGOALText : MonoBehaviour
         {
             FadeInGraphics(GOAL_FIRST_Graphics, FADE_TIME);
         }
+
+        // if (SE_NAME != null)
+        // {
+        //     SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+        // }
 
         // ウィンドウ表示までの時間待機
         yield return new WaitForSeconds(WINDOW_ACTUVE_TIME);

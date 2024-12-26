@@ -55,7 +55,7 @@ public class StageManager : MonoBehaviour
         if (stageUnlocked == null) // nullチェックを追加
         {
             // セーブデータからロード（例: PlayerPrefs）
-            stageUnlocked = new List<bool> { true, true, false, false }; // 初期状態（ステージ1-1のみ解放）
+            stageUnlocked = new List<bool> { true, false, false, false }; // 初期状態（ステージ1-1のみ解放）
             // PlayerPrefsからロードするロジックを追加
         }
     }

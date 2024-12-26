@@ -4,11 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// ステージセレクト画面のボタンをキーボードで選択するスクリプト
+/// </summary>
 public class StageSelectUI : MonoBehaviour
 {
     // インスペクターから設定する変数
+    [Header("各ステージのボタン")]
     [SerializeField] private Button[] STAGE_BUTTUNS; // 各ステージのボタン
+
+    [Header("各ステージのシーン名")]
     [SerializeField] private string[] SCENE_NAME; // 遷移するシーンの名前
+
+    [Header("ボタン選択のSE")]
+    [SerializeField] private string SE_CHANGE_NAME;   // 選択のSEの名前
+
+    [Header("ボタン決定のSE")]
+    [SerializeField] private string SE_SELECT_NAME;   // 決定のSEの名前
 
     // 内部処理する変数
     private int selectedStageIndex = 0; // 現在選択中のステージ
@@ -74,6 +86,11 @@ public class StageSelectUI : MonoBehaviour
             }
             while (!StageManager.Instance.IsStageUnlocked(selectedStageIndex)); // 解放されているまで繰り返す
 
+            if (SE_CHANGE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_CHANGE_NAME); // SEを再生
+            }
+
             HighlightSelectedButton(); // 選択したボタンをハイライト表示
 
             Debug.Log($"{selectedStageIndex}");
@@ -91,6 +108,11 @@ public class StageSelectUI : MonoBehaviour
             }
             while (!StageManager.Instance.IsStageUnlocked(selectedStageIndex)); // 解放されているまで繰り返す
 
+            if (SE_CHANGE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_CHANGE_NAME); // SEを再生
+            }
+
             HighlightSelectedButton(); // 選択したボタンをハイライト表示
 
             Debug.Log($"{selectedStageIndex}");
@@ -100,6 +122,11 @@ public class StageSelectUI : MonoBehaviour
         {
             if (StageManager.Instance.IsStageUnlocked(selectedStageIndex)) // 解放済みなら選択可能
             {
+                if (SE_SELECT_NAME != null)
+                {
+                    SoundManager.Instance.PlaySE(SE_SELECT_NAME); // SEを再生
+                }
+                
                 SelectStage(selectedStageIndex);
             }
 

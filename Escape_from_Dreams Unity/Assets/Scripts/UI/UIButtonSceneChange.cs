@@ -11,10 +11,13 @@ public class UIButtonSceneChange : MonoBehaviour, IPointerClickHandler
 {
     // インスペクターから設定する変数
     [Header("遷移先のシーン名")]
-    [SerializeField] private string SCENE_CHANGE_NAME; // 遷移先のシーン名
+    [SerializeField] private string SCENE_CHANGE_NAME;      // 遷移先のシーン名
 
     [Header("遷移までの待機時間")]
     [SerializeField] private float SCENE_CHANGE_DELAY = 0f; // 遷移前の遅延時間（任意）
+
+    [Header("ボタンクリックのSE")]
+    [SerializeField] private string SE_NAME;                // SEの名前
 
     void Start()
     {
@@ -28,6 +31,11 @@ public class UIButtonSceneChange : MonoBehaviour, IPointerClickHandler
     {
         if (!string.IsNullOrEmpty(SCENE_CHANGE_NAME))
         {
+            if (SE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+            }
+            
             if (SCENE_CHANGE_DELAY > 0)
             {
                 SceneChangeManager.Instance.ChangeSceneLoad(SCENE_CHANGE_NAME, SCENE_CHANGE_DELAY); // 遅延あり

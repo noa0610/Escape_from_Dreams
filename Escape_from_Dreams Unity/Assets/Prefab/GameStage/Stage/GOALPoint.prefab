@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74efc38990156b044af6267483cc4a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UNLOCK_STAGE_NUMBER: 1
+  SE_NAME: SE GOAL
 --- !u!33 &9205595255110406807
 MeshFilter:
   m_ObjectHideFlags: 0

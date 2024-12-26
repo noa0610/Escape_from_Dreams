@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,8 +25,8 @@ public class UIGameOver : MonoBehaviour
     [SerializeField] private float WINDOW_ACTUVE_TIME = 2; // ウィンドウを表示するまでの時間
     [SerializeField] private float FADE_TIME = 1; // フェード効果を反映させる時間
 
-    // 内部処理する変数
-    
+    [Header("ゲームオーバー時のSE")]
+    [SerializeField] private string SE_NAME; // SEの名前
 
     private void Start()
     {
@@ -53,6 +52,11 @@ public class UIGameOver : MonoBehaviour
         if (GAMEOVER_FIRST_Graphics != null)
         {
             FadeInGraphics(GAMEOVER_FIRST_Graphics, FADE_TIME);
+        }
+
+        if (SE_NAME != null)
+        {
+            SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
         }
 
         // ウィンドウ表示までの時間待機

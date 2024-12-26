@@ -11,11 +11,14 @@ public class GOALPoint : MonoBehaviour
     [Header("現在のステージの番号を入力")]
     [SerializeField] private int UNLOCK_STAGE_NUMBER; // 解放するステージの番号
 
-    [Header("次のシーン名を入力")]
-    [SerializeField] private string SCENE_CHANGE_NAME; // 遷移するシーン名
+    [Header("ゴール時のSE")]
+    [SerializeField] private string SE_NAME;           // SEの名前
 
-    [Header("シーン遷移までの時間")]
-    [SerializeField] private float SCENE_CHANGE_TIME; // シーン遷移までの時間
+    // [Header("次のシーン名を入力")]
+    // [SerializeField] private string SCENE_CHANGE_NAME; // 遷移するシーン名
+
+    // [Header("シーン遷移までの時間")]
+    // [SerializeField] private float SCENE_CHANGE_TIME; // シーン遷移までの時間
 
     private void Awake()
     {
@@ -31,6 +34,12 @@ public class GOALPoint : MonoBehaviour
             {
                 StageManager.Instance.UnlockStage(UNLOCK_STAGE_NUMBER); // ステージを解放
             }
+
+            if (SE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+            }
+
             GameManager.Instance.IsGOAL = true; // ゴールフラグを立てる
             GameManager.Instance.IsGame = false; // ゲーム終了
             // SceneChangeManager.Instance.ChangeSceneLoad(SCENE_CHANGE_NAME, SCENE_CHANGE_TIME); // 一定時間待機後シーン遷移

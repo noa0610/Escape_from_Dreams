@@ -20,6 +20,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float KNOCKBACK_FORSE = 10f; // ノックバック力
     [SerializeField] private float KNOCKBACK_TIME = 0.3f; // ノックバック時間
 
+    [Header("ノックバック時のSE")]
+    [SerializeField] private string SE_NAME; // SEの名前
+
+
     // 内部処理する変数
     private bool isKnockedBack; // ノックバック中のフラグ
     private Rigidbody _rigidbody; // リジッドボディ
@@ -40,17 +44,20 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 常に前に進む
-        ForwardMove();
-
-        ApplyStatusEffects(); // アイテムの効果を確認
-
-        if (isKnockedBack == false && isSpeedBoost == false) // ノックバックが発生していなければ
+        if (!GameManager.Instance.IsGameOver) // ゲームーオーバーになるまで操作可能
         {
-            SideMoveInput(); // 左右移動入力
-        }
+            // 常に前に進む
+            ForwardMove();
 
-        MoveSpeedLimit(); // 移動速度制限
+            ApplyStatusEffects(); // アイテムの効果を確認
+
+            if (isKnockedBack == false && isSpeedBoost == false) // ノックバックが発生していなければ
+            {
+                SideMoveInput(); // 左右移動入力
+            }
+
+            MoveSpeedLimit(); // 移動速度制限
+        }
     }
 
 
@@ -131,6 +138,11 @@ public class PlayerMove : MonoBehaviour
 
         // ノックバック中のフラグを設定
         isKnockedBack = true;
+
+        if (SE_NAME != null)
+        {
+            SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+        }
 
         // ノックバックの終了を遅れて実行
         Invoke(nameof(ResetKnockback), KNOCKBACK_TIME);

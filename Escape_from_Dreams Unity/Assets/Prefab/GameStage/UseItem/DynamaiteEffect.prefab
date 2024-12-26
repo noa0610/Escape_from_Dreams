@@ -69,6 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DURATION: 1
   DAMAGE: 10
+  SE_FIRST_NAME: SE ExplosionAttack
+  SE_ATTACK_NAME: 
 --- !u!54 &1085405193339542230
 Rigidbody:
   m_ObjectHideFlags: 0

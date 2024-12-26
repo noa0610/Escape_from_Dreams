@@ -9,6 +9,7 @@ public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private string itemName; // アイテム名
     [SerializeField] private Sprite itemIcon; // アイテムの画像
+    [SerializeField] private string SE_NAME;  // アイテム取得時のSEの名前
 
     /// <summary>
     /// アイテムのデータを取得できるメソッド
@@ -22,8 +23,12 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
+            if (SE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
+            }
             Destroy(this.gameObject);
         }
     }

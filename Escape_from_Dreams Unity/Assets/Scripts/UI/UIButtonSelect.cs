@@ -4,11 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// ボタンを選択してシーンを切り替えるUI用スクリプト
+/// </summary>
 public class UIButtonSelect : MonoBehaviour
 {
     // インスペクターから設定する変数
+    [Header("選択をするボタン")]
     [SerializeField] private Button[] SELECT_BUTTUNS; // 各ボタン
-    [SerializeField] private string[] SCENE_NAME; // 遷移するシーンの名前
+
+    [Header("遷移するシーンの名前")]
+    [SerializeField] private string[] SCENE_NAME;     // 遷移するシーンの名前
+
+    [Header("ボタン選択のSE")]
+    [SerializeField] private string SE_CHANGE_NAME;   // 選択のSEの名前
+
+    [Header("ボタン決定のSE")]
+    [SerializeField] private string SE_SELECT_NAME;   // 決定のSEの名前
 
     // 内部処理する変数
     private int selectedButtunIndex = 0; // 現在選択中のボタン
@@ -59,6 +71,11 @@ public class UIButtonSelect : MonoBehaviour
                 selectedButtunIndex = SELECT_BUTTUNS.Length - 1;
             }
 
+            if (SE_CHANGE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_CHANGE_NAME); // SEを再生
+            }
+
             HighlightSelectedButton(); // 選択したボタンをハイライト表示
 
             Debug.Log($"{selectedButtunIndex}");
@@ -72,6 +89,11 @@ public class UIButtonSelect : MonoBehaviour
                 selectedButtunIndex = 0;
             }
 
+            if (SE_CHANGE_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_CHANGE_NAME); // SEを再生
+            }
+
             HighlightSelectedButton(); // 選択したボタンをハイライト表示
 
             Debug.Log($"{selectedButtunIndex}");
@@ -79,6 +101,11 @@ public class UIButtonSelect : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (SE_SELECT_NAME != null)
+            {
+                SoundManager.Instance.PlaySE(SE_SELECT_NAME); // SEを再生
+            }
+            
             SelectButtun(selectedButtunIndex);
 
             Debug.Log($"{selectedButtunIndex}");

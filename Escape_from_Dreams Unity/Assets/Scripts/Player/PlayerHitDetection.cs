@@ -13,6 +13,7 @@ public class PlayerHitDetection : MonoBehaviour
     // 内部処理する変数
     private ItemStock _ItemStock;
     private PlayerMove _PlayerMove;
+    private HashSet<int> touchedItemIDs = new HashSet<int>(); // 重複防止のためHashSetを使用
 
     private void Start()
     {
@@ -31,14 +32,22 @@ public class PlayerHitDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         Debug.Log($"{this.gameObject.name}:{other.gameObject.name}");
         if (other.CompareTag("Item")) // アイテムに触れたら
         {
+            int itemID = other.GetInstanceID(); // インスタンスIDを取得
+
+            if (touchedItemIDs.Contains(itemID))
+            {
+                Debug.Log("Already touched this item. Ignoring.");
+                return; // 既に触れたアイテムなら処理を終了
+            }
+
             ItemPickup pickup = other.GetComponent<ItemPickup>(); // アイテムのコンポーネント取得
             if (pickup != null)
             {
                 _ItemStock.AddItem(pickup.GetItem()); // ストック内にアイテムを追加
+                touchedItemIDs.Add(itemID); // インスタンスIDを記録
             }
         }
     }
@@ -72,7 +81,7 @@ public class PlayerHitDetection : MonoBehaviour
         }
 
         // 壁との接触
-        if(collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             // 最初の接触点を取得
             ContactPoint contact = collision.GetContact(0);
@@ -83,5 +92,11 @@ public class PlayerHitDetection : MonoBehaviour
                 Debug.Log("Speed reduced: Side hit an obstacle!");
             }
         }
+    }
+
+    // インスタンスIDの記録をリセット
+    public void ResetTouchedItems()
+    {
+        touchedItemIDs.Clear();
     }
 }
