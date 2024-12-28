@@ -9,11 +9,14 @@ using UnityEngine;
 public class PlayerHitDetection : MonoBehaviour
 {
     // インスペクターから設定する変数
+    [Header("アニメーションするオブジェクト")]
+    [SerializeField] private GameObject CHARA_ANIME_OBJECT;
 
     // 内部処理する変数
     private ItemStock _ItemStock;
     private PlayerMove _PlayerMove;
     private HashSet<int> touchedItemIDs = new HashSet<int>(); // 重複防止のためHashSetを使用
+    private Animator _animator;
 
     private void Start()
     {
@@ -66,6 +69,11 @@ public class PlayerHitDetection : MonoBehaviour
             // 衝突した自分側のコライダーを確認
             if (contact.thisCollider.CompareTag("BodyCollider"))
             {
+                if (CHARA_ANIME_OBJECT != null)
+                {
+                    _animator = CHARA_ANIME_OBJECT.GetComponent<Animator>(); // アニメーター取得
+                    _animator.SetTrigger("isGameOver"); // アニメーション切り替え
+                }
                 GameManager.Instance.IsGameOver = true; // ゲームオーバーフラグを立てる
 
                 Debug.Log($"Game Over: Body hit an obstacle! Flag:{GameManager.Instance.IsGameOver}");

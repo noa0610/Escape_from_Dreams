@@ -40,7 +40,7 @@ public class UIStartText : MonoBehaviour
         {
             START_FIRST_OBJECT.SetActive(false); // テキストオブジェクトを非表示
             START_NEXT_OBJECT.SetActive(true); // 画像を表示する
-            if (SE_NAME != null && isSE)
+            if (SE_NAME != null && isSE == false)
             {
                 SoundManager.Instance.PlaySE(SE_NAME); // SEを再生
                 isSE = true;
